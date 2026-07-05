@@ -1,0 +1,594 @@
+/* ============================================
+   건강 모니터링 시스템 - 페이지별 스타일시트
+   글로벌 의료 격차 분석 및 정책 확장 페이지
+   ============================================ */
+
+/* 네비게이션 메뉴 */
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-menu-item {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-menu-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 미션 박스 */
+.mission-box {
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.mission-box h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.mission-box p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.mission-box strong {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* 의료 격차 분석 페이지 */
+.gap-intro {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.gap-intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.gap-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.gap-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color);
+}
+
+.gap-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.gap-number {
+    background: var(--primary-color);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.gap-card-header h3 {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.gap-card-content {
+    margin-top: 1rem;
+}
+
+.gap-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.comparison-item {
+    background: var(--bg-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.comparison-item h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.comparison-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.comparison-item li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.comparison-item li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.comparison-item li strong {
+    color: var(--danger-color);
+}
+
+.gap-source {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.gap-note {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg-color);
+    border-radius: 8px;
+    border-left: 3px solid var(--warning-color);
+}
+
+.gap-note p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.gap-conclusion {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.gap-conclusion h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.gap-conclusion p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.gap-conclusion strong {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* 센서 데모 페이지 */
+.demo-intro {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.demo-intro h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.demo-intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.demo-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.feature-item {
+    background: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+    line-height: 1.6;
+}
+
+/* 데이터 축적 페이지 */
+.data-accumulation-intro {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.data-accumulation-intro h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.data-accumulation-intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.data-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.flow-step {
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+    box-shadow: var(--shadow);
+}
+
+.flow-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.flow-step h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.flow-step p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.flow-arrow {
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.records-section {
+    margin-top: 2rem;
+}
+
+.records-section h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.section-desc {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.data-impact {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.data-impact h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.data-impact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.data-impact li {
+    padding: 0.75rem 0;
+    padding-left: 2rem;
+    position: relative;
+    line-height: 1.8;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-impact li:last-child {
+    border-bottom: none;
+}
+
+.data-impact li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 정책 확장 페이지 */
+.policy-intro {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.policy-intro h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.policy-intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.policy-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.policy-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--primary-color);
+}
+
+.policy-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.policy-icon {
+    font-size: 2.5rem;
+}
+
+.policy-card-header h3 {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.policy-card-content h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.policy-card-content h4:first-child {
+    margin-top: 0;
+}
+
+.policy-card-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.policy-card-content li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.policy-card-content li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.policy-implementation {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.policy-implementation h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.strategy-item {
+    background: var(--bg-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 3px solid var(--primary-color);
+}
+
+.strategy-item h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.strategy-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.policy-impact {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.policy-impact h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.impact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.impact-item {
+    background: var(--bg-color);
+    padding: 1.25rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--success-color);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.impact-item strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.policy-conclusion {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.policy-conclusion h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.policy-conclusion p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.policy-conclusion strong {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .gap-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .data-flow {
+        flex-direction: column;
+    }
+
+    .flow-arrow {
+        transform: rotate(90deg);
+    }
+
+    .policy-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .strategy-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .gap-card {
+        padding: 1.5rem;
+    }
+
+    .policy-card {
+        padding: 1.5rem;
+    }
+
+    .mission-box {
+        padding: 1.5rem;
+    }
+}
+
+
+
+
+
+
+
+

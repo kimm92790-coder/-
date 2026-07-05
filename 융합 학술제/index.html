@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="글로벌 의료 격차 분석 및 저비용 디지털 헬스 기술 기반 해결 방안 - SDGs 3번 목표">
+    <title>글로벌 의료 격차 완화 프로젝트</title>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- pdfmake -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/modern-design.css">
+</head>
+<body>
+    <!-- 상단 네비게이션 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title">글로벌 의료 격차 완화 프로젝트</h1>
+            <div class="nav-menu">
+                <button class="nav-menu-item" onclick="app.showScreen('homeScreen')">홈</button>
+                <button class="nav-menu-item" onclick="app.showScreen('gapAnalysisScreen')">의료 격차 분석</button>
+                <button class="nav-menu-item" onclick="app.showScreen('sensorsScreen')">센서 데모</button>
+                <button class="nav-menu-item" onclick="app.showScreen('recordsScreen')">데이터 축적</button>
+                <button class="nav-menu-item" onclick="app.showScreen('policyScreen')">정책 확장</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 위험 알림 박스 (위험 시 표시) -->
+    <div class="danger-alert" id="dangerAlert" style="display: none;">
+        <div class="danger-alert-content">
+            <span class="danger-icon">⚠️</span>
+            <span class="danger-text" id="dangerText">위험 수치가 감지되었습니다!</span>
+        </div>
+    </div>
+
+    <!-- 메인 컨테이너 -->
+    <main class="main-container" id="mainContainer">
+        <!-- 홈 화면 -->
+        <section class="screen active" id="homeScreen">
+            <!-- 메인 히어로 슬라이더: 글로벌 의료 현장의 모습을 번갈아 보여줌 -->
+            <div class="hero-slider" id="heroSlider">
+                <div class="hero-slide active">
+                    <!-- 메인 히어로 이미지: 영문 파일명 사용 (Netlify 호환성) -->
+                    <img src="images/slide-1.png" alt="의료 인력이 영유아에게 예방접종을 제공하는 모습">
+                    <div class="hero-caption">
+                        <h3>의료 인력이 부족한 지역의 예방접종 현장</h3>
+                        <p>개발도상국에서는 기본 예방접종조차 지연되는 경우가 많습니다. 디지털 헬스 기술은 이런 현장의 데이터를 체계적으로 수집하는 데 기여할 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="hero-slide">
+                    <img src="images/slide-2.png" alt="보건 인력이 아동의 영양 상태를 측정하는 모습">
+                    <div class="hero-caption">
+                        <h3>영양 상태 측정과 조기 경보</h3>
+                        <p>저비용 측정 도구와 모바일 앱을 결합하면, 영양실조 아동을 더 빨리 발견하고 대응할 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="hero-slide">
+                    <img src="images/slide-3.png" alt="응급실 침대에 누워 있는 아동들">
+                    <div class="hero-caption">
+                        <h3>한정된 병상과 장비</h3>
+                        <p>병상과 중환자실 장비가 부족한 지역에서는 조기 위험 감지가 곧 생존 확률을 높이는 핵심 수단입니다.</p>
+                    </div>
+                </div>
+                <div class="hero-slide">
+                    <img src="images/slide-4.png" alt="아이에게 백신을 투여하는 현장">
+                    <div class="hero-caption">
+                        <h3>백신·의약품 접근성의 격차</h3>
+                        <p>데이터 기반 모니터링은 어떤 지역에 백신이 더 시급한지, 어떤 연령대가 취약한지를 보여줍니다.</p>
+                    </div>
+                </div>
+                <div class="hero-slide">
+                    <img src="images/slide-5.png" alt="의료진이 아기를 진료하는 장면">
+                    <div class="hero-caption">
+                        <h3>기초 진료를 지키는 현지 의료진</h3>
+                        <p>저비용 센서와 모바일 앱은 현지 의료진이 환자의 상태를 정밀하게 추적하고 기록할 수 있도록 돕습니다.</p>
+                    </div>
+                </div>
+                <div class="hero-slide">
+                    <img src="images/slide-6.png" alt="유니세프 의료 지원을 받는 영유아">
+                    <div class="hero-caption">
+                        <h3>데이터로 연결되는 글로벌 연대</h3>
+                        <p>현장에서 수집된 건강 데이터는 국제기구와 정부가 보다 정확한 공중보건 정책을 설계하는 근거가 됩니다.</p>
+                    </div>
+                </div>
+                <div class="hero-dots"></div>
+            </div>
+
+            <div class="home-header">
+                <h2>글로벌 의료 격차 완화 프로젝트</h2>
+                <p class="subtitle">UN SDGs 3번 목표: 건강과 웰빙 (3.d: 조기경보 역량 강화)</p>
+                <p class="description">
+                    OECD 선진국과 개발도상국 간 의료 격차를 분석하고,<br>
+                    저비용 디지털 헬스 기술을 통해 격차 완화 가능성을 제시합니다.
+                </p>
+            </div>
+            
+            <div class="mission-box">
+                <h3>프로젝트 목적</h3>
+                <p>
+                    저비용 센서 + 모바일 앱 + 디지털 헬스 기술이<br>
+                    의료 인프라가 부족한 지역에서도<br>
+                    <strong>조기 위험 인식과 공중보건 대응의 출발점</strong>이 될 수 있음을 제시합니다.
+                </p>
+            </div>
+            
+            <div class="card-grid">
+                <div class="home-card" onclick="app.showScreen('gapAnalysisScreen')">
+                    <div class="card-icon-wrapper">
+                        <div class="card-icon">🌍</div>
+                        <div class="card-content">
+                            <h3>의료 격차 분석</h3>
+                            <p>6가지 글로벌 의료 격차 문제를 체계적으로 분석합니다</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="home-card" onclick="app.showScreen('sensorsScreen')">
+                    <div class="card-icon-wrapper">
+                        <div class="card-icon">📊</div>
+                        <div class="card-content">
+                            <h3>센서 데모</h3>
+                            <p>저비용 센서 기반 건강 모니터링 기술을 체험합니다</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="home-card" onclick="app.showScreen('recordsScreen')">
+                    <div class="card-icon-wrapper">
+                        <div class="card-icon">📈</div>
+                        <div class="card-content">
+                            <h3>데이터 축적</h3>
+                            <p>개인 건강 데이터가 공중보건 데이터로 확장되는 과정을 확인합니다</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="home-card" onclick="app.showScreen('policyScreen')">
+                    <div class="card-icon-wrapper">
+                        <div class="card-icon">🏛️</div>
+                        <div class="card-content">
+                            <h3>정책 확장</h3>
+                            <p>개발도상국 및 의료 취약 지역에서의 활용 방안을 제시합니다</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 글로벌 의료 격차 분석 화면 -->
+        <section class="screen" id="gapAnalysisScreen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="app.showScreen('homeScreen')">← 뒤로</button>
+                <h2>글로벌 의료 격차 분석</h2>
+            </div>
+            
+            <div class="gap-intro">
+                <p>
+                    OECD 선진국과 개발도상국 간 의료 격차는 단순한 자원 차이를 넘어<br>
+                    체계적이고 구조적인 문제입니다. 아래 6가지 핵심 영역에서의 격차를 분석합니다.
+                </p>
+            </div>
+
+            <div class="gap-cards">
+                <!-- ① 의료인력·기초 인프라 격차 -->
+                <div class="gap-card">
+                    <div class="gap-card-header">
+                        <span class="gap-number">①</span>
+                        <h3>의료인력·기초 인프라 격차</h3>
+                    </div>
+                    <div class="gap-card-content">
+                        <!-- 인구 1,000명 당 의사 수 세계 지도 -->
+                        <div class="chart-wrapper">
+                            <div class="chart-title">
+                                인구 1,000명 당 의사 수
+                            </div>
+                            <img src="images/doctor-density-map.png" alt="세계 각국 인구 1,000명 당 의사 수 분포 지도" style="width: 100%; border-radius: 12px;">
+                            <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                짙은 파란색일수록 인구 1,000명 당 의사가 많은 국가를 의미합니다. 유럽·북미·호주 등은 3~5명 수준인 반면, 사하라 이남 아프리카와 일부 아시아 국가는 0.1~1명에 불과해
+                                기초 진료와 응급 대응 능력에서 큰 격차가 발생합니다.
+                            </p>
+                        </div>
+                        <div class="gap-comparison">
+                            <div class="comparison-item">
+                                <h4>OECD 국가</h4>
+                                <ul>
+                                    <li>의사·간호사 밀도가 높음</li>
+                                    <li>병상·장비 보유율 우수</li>
+                                    <li>기초 진료 및 응급 대응 능력 우수</li>
+                                    <li><strong>의사 밀도: 약 3.0~4.0+명/1,000명</strong></li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>개발도상국</h4>
+                                <ul>
+                                    <li>의사 수·간호사·병상 등 기초 자원 부족</li>
+                                    <li>기본 의료서비스 접근 자체가 제한됨</li>
+                                    <li><strong>의사 밀도: 약 0.1~1.0명/1,000명</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="gap-source">
+                            <strong>데이터 출처:</strong> WHO, World Bank, Our World in Data
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ② 보건의료 지출 및 R&D 투자 격차 -->
+                <div class="gap-card">
+                    <div class="gap-card-header">
+                        <span class="gap-number">②</span>
+                        <h3>보건의료 지출 및 R&D 투자 격차</h3>
+                    </div>
+                    <div class="gap-card-content">
+                        <!-- GDP 대비 보건의료 지출 비율 막대 그래프 -->
+                        <div class="chart-wrapper">
+                            <div class="chart-title">
+                                GDP 대비 보건의료 지출 비율 (% of GDP)
+                            </div>
+                            <img src="images/health-expenditure-gdp.png" alt="OECD 국가별 GDP 대비 보건의료 지출 비율 막대 그래프" style="width: 100%; border-radius: 12px;">
+                            <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                파란색 막대는 정부·의무적 지출, 옅은 색 막대는 본인부담(out-of-pocket)을 의미합니다. 미국, 독일, 프랑스 등 OECD 고소득 국가는
+                                <strong>GDP의 약 10~17%</strong>를 보건의료에 사용하지만, 일부 중·저소득 국가는 <strong>5% 이하</strong> 수준에 머물러
+                                의료 인력 확충, 장비 도입, 연구개발(R&amp;D) 투자 여력이 크게 제한됩니다.
+                            </p>
+                        </div>
+                        <div class="gap-comparison">
+                            <div class="comparison-item">
+                                <h4>OECD 국가</h4>
+                                <ul>
+                                    <li>GDP 대비 보건지출 비중이 높음</li>
+                                    <li>인력·장비·연구개발·디지털화 투자 여력 큼</li>
+                                    <li>CT·MRI·AI 연구·백신 생산 역량 보유</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>개발도상국</h4>
+                                <ul>
+                                    <li>보건지출 규모가 낮음</li>
+                                    <li>첨단 장비 도입과 인력 교육이 제한됨</li>
+                                    <li>R&D 투자 부족으로 기술 격차 확대</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ③ 첨단 의료기술 보급 격차 -->
+                <div class="gap-card">
+                    <div class="gap-card-header">
+                        <span class="gap-number">③</span>
+                        <h3>첨단 의료기술(AI·로봇수술·디지털헬스) 보급 격차</h3>
+                    </div>
+                    <div class="gap-card-content">
+                        <!-- 보건 직종 vs 기타 직종의 AI 관련 채용 공고 추이 -->
+                        <div class="chart-wrapper">
+                            <div class="chart-title">
+                                보건 직종 및 기타 보건 분야 직업에서의 AI 관련 채용 공고 비중
+                            </div>
+                            <img src="images/health-ai-job-postings.png" alt="캐나다·영국·미국에서 보건 직종과 기타 직종의 AI 관련 채용 공고 비중 추이 그래프" style="width: 100%; border-radius: 12px;">
+                            <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                그래프는 캐나다, 영국, 미국에서 <strong>보건 직종(health)</strong>과 <strong>기타 보건 관련 직종(other)</strong>에서
+                                AI 역량을 요구하는 채용 공고 비중이 2018~2023년 사이에 꾸준히 증가하고 있음을 보여 줍니다.
+                                선진국에서는 의료 AI·디지털헬스에 투자하면서 관련 인력을 적극적으로 채용하는 반면,
+                                많은 개발도상국에서는 이러한 <strong>AI 기반 보건 인력 수요와 채용</strong> 자체가 충분히 발생하지 못하고 있어
+                                첨단 의료기술 보급 격차가 더 벌어지고 있습니다.
+                            </p>
+                        </div>
+                        <div class="gap-comparison">
+                            <div class="comparison-item">
+                                <h4>OECD·고소득국</h4>
+                                <ul>
+                                    <li>의료 AI, 로봇수술, 디지털 병원 시스템 도입</li>
+                                    <li>데이터 인프라 및 전문 인력 보유</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>개발도상국</h4>
+                                <ul>
+                                    <li>초기 비용, 데이터 인프라 부족</li>
+                                    <li>전문 인력 부족 및 규제로 도입 지연</li>
+                                    <li><strong>OECD(2024-2025) 보고서: AI 채택 격차 지적</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ④ 원격진료 활용의 양극화 -->
+                <div class="gap-card">
+                    <div class="gap-card-header">
+                        <span class="gap-number">④</span>
+                        <h3>원격진료(텔레메디슨) 활용의 양극화</h3>
+                    </div>
+                    <div class="gap-card-content">
+                        <!-- 모바일 원격의료 시장 지역별 전망 -->
+                        <div class="chart-wrapper">
+                            <div class="chart-title">
+                                모바일 원격의료 시장 지역별 전망
+                            </div>
+                            <img src="images/mobile-telemedicine-market-regional.png" alt="지역별 모바일 원격의료 시장 규모 및 점유율" style="width: 100%; border-radius: 12px;">
+                            <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                모바일 원격의료 시장은 <strong>북미(39%, 6,608M)</strong>와 <strong>유럽(28%, 4,744M)</strong>이
+                                전체 시장의 약 67%를 차지하며 압도적 우위를 보입니다. <strong>아시아-태평양(26%, 4,405M)</strong>이
+                                그 뒤를 잇지만, <strong>중동·아프리카(7%, 1,185M)</strong>는 시장 점유율이 매우 낮습니다.
+                                이는 OECD 국가들이 코로나19 이후 원격진료를 제도화하고 보험·법적 기반을 마련한 반면,
+                                많은 개발도상국은 인터넷 접근성, 전력, 디지털 문해력, 재정 문제로 원격진료 확산이 제한되고 있음을 보여줍니다.
+                            </p>
+                        </div>
+                        <div class="gap-comparison">
+                            <div class="comparison-item">
+                                <h4>OECD 국가</h4>
+                                <ul>
+                                    <li>코로나19 이후 원격진료 제도화</li>
+                                    <li>보험·법적 기반 마련</li>
+                                    <li>디지털 인프라 구축</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>개발도상국</h4>
+                                <ul>
+                                    <li>인터넷 접근성 제한</li>
+                                    <li>전력·디지털 문해력·재정 문제</li>
+                                    <li>원격진료 확산 제한</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="gap-note">
+                            <p><strong>원격진료의 장점:</strong> 접근성 향상, 비용 절감</p>
+                            <p><strong>한계:</strong> 인프라 및 디지털 문해력 필요</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⑤ 백신·의약품 생산 및 배분의 불평등 -->
+                <div class="gap-card">
+                    <div class="gap-card-header">
+                        <span class="gap-number">⑤</span>
+                        <h3>백신·의약품 생산 및 배분의 불평등</h3>
+                    </div>
+                    <div class="gap-card-content">
+                        <!-- COVID-19 백신 접종 누적 데이터 -->
+                        <div class="chart-wrapper">
+                            <div class="chart-title">
+                                전체 인구 중 COVID-19 백신 접종 누적 횟수 및 커버리지
+                            </div>
+                            <img src="images/covid19-vaccination-coverage.png" alt="COVID-19 백신 접종 누적 횟수 및 ≥1회 접종, 1차 시리즈 커버리지 추이" style="width: 100%; border-radius: 12px;">
+                            <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                그래프는 2021년 3월부터 2023년 12월까지의 백신 접종 추이를 보여줍니다.
+                                <strong>누적 접종 횟수</strong>는 2021년 급증 후 2023년 중반부터 정체되었고,
+                                <strong>≥1회 접종 커버리지</strong>는 약 37-38%, <strong>1차 시리즈 완료 커버리지</strong>는 약 31-32%에 머물렀습니다.
+                                이는 코로나19 백신 개발·생산이 선진국 및 대형 제약사 중심으로 진행되면서,
+                                아프리카 등 일부 지역은 초기 백신 생산 비율이 <strong>1%대</strong>에 불과하고
+                                현지 생산 역량 부족으로 공급망 충격과 접종 지연이 발생했음을 보여줍니다.
+                            </p>
+                        </div>
+                        <div class="gap-comparison">
+                            <div class="comparison-item">
+                                <h4>선진국 및 대형 제약사</h4>
+                                <ul>
+                                    <li>코로나19 백신 개발·생산 중심</li>
+                                    <li>생산 역량 및 공급망 보유</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>아프리카 등 일부 지역</h4>
+                                <ul>
+                                    <li>초기 백신 생산 비율 <strong>1%대</strong>에 불과</li>
+                                    <li>현지 생산 역량 부족</li>
+                                    <li>공급망 충격과 접종 지연</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⑥ 감염병·팬데믹 대응 역량 차이 -->
+                <div class="gap-card">
+                    <div class="gap-card-header">
+                        <span class="gap-number">⑥</span>
+                        <h3>감염병·팬데믹 대응 역량 차이</h3>
+                    </div>
+                    <div class="gap-card-content">
+                        <!-- SPAR 평균 점수 세계 지도 -->
+                        <div class="chart-wrapper">
+                            <div class="chart-title">
+                                SPAR 평균 점수 (State Party Annual Report 평균 점수)
+                            </div>
+                            <img src="images/spar-average-score-map.png" alt="세계 각국 SPAR 평균 점수 분포 지도" style="width: 100%; border-radius: 12px;">
+                            <p style="margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">
+                                SPAR(State Party Annual Report)는 WHO가 각국의 감염병 대응 역량을 평가하는 지표입니다.
+                                <strong>초록색</strong>은 높은 대응 역량을, <strong>주황색</strong>은 중간 수준, <strong>회색</strong>은 데이터 부재를 의미합니다.
+                                선진국(미국, 유럽, 호주 등)은 대체로 높은 점수를 보이지만, 많은 개발도상국(특히 아프리카 일부 지역)은
+                                검사 접근성, 병상, 중환자 치료 역량에서 제한을 보입니다. 다만 일부 개발도상국은 지역사회 기반 방역으로 성과를 내기도 합니다.
+                            </p>
+                        </div>
+                        <div class="gap-comparison">
+                            <div class="comparison-item">
+                                <h4>선진국</h4>
+                                <ul>
+                                    <li>검사·데이터·중환자 치료 역량 우위</li>
+                                    <li>의료 인프라 및 자원 보유</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-item">
+                                <h4>개발도상국</h4>
+                                <ul>
+                                    <li>검사 접근성과 병상 부족</li>
+                                    <li>피해 확대 경향</li>
+                                    <li><strong>단, 일부 개발도상국은 지역사회 기반 방역으로 성과</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gap-conclusion">
+                <h3>핵심 메시지</h3>
+                <p>
+                    이러한 격차는 단순히 자원의 차이가 아니라 <strong>구조적이고 체계적인 문제</strong>입니다.<br>
+                    하지만 저비용 디지털 헬스 기술은 이러한 격차를 완화할 수 있는 실질적인 해결책을 제시합니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- 센서 리스트 화면 (데모) -->
+        <section class="screen" id="sensorsScreen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="app.showScreen('homeScreen')">← 뒤로</button>
+                <h2>저비용 센서 기반 건강 모니터링 데모</h2>
+            </div>
+            
+            <div class="demo-intro">
+                <div class="illustration-section">
+                    <div class="illustration-icon">📱</div>
+                </div>
+                <h3>데모 개요</h3>
+                <p>
+                    저비용 아두이노 센서와 스마트폰만으로 건강 데이터를 실시간으로 측정하고 모니터링할 수 있습니다.<br>
+                    이 기술은 의료 인프라가 부족한 지역에서도 <strong>조기 위험 인식</strong>을 가능하게 합니다.
+                </p>
+                <div class="demo-features">
+                    <div class="feature-item">
+                        <strong>저비용:</strong> 아두이노 센서는 수만 원 수준으로 구축 가능
+                    </div>
+                    <div class="feature-item">
+                        <strong>실시간 모니터링:</strong> 블루투스를 통한 즉시 데이터 수신
+                    </div>
+                    <div class="feature-item">
+                        <strong>위험 조기 감지:</strong> 정상 범위 벗어남 시 즉시 경고
+                    </div>
+                    <div class="feature-item">
+                        <strong>확장 가능:</strong> 개인 데이터 → 지역 데이터 → 공중보건 데이터로 확장
+                    </div>
+                </div>
+            </div>
+
+            <div class="sensor-list" id="sensorList">
+                <!-- 센서 항목들이 동적으로 추가됩니다 -->
+            </div>
+
+            <!-- 블루투스 연결 상태 -->
+            <div class="bluetooth-status" id="bluetoothStatus">
+                <span class="status-indicator" id="statusIndicator">⚫</span>
+                <span id="statusText">블루투스 미연결</span>
+                <button class="btn-connect" id="btnConnect" onclick="bluetoothManager.connect()">연결하기</button>
+            </div>
+        </section>
+
+        <!-- 센서 상세 화면 -->
+        <section class="screen" id="sensorDetailScreen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="app.showScreen('sensorsScreen')">← 뒤로</button>
+                <h2 id="sensorDetailTitle">센서 상세</h2>
+            </div>
+            
+            <div class="sensor-detail-container">
+                <!-- 실시간 값 -->
+                <div class="realtime-value-box">
+                    <div class="value-label">현재 측정값</div>
+                    <div class="value-number" id="currentValue">--</div>
+                    <div class="value-unit" id="valueUnit">--</div>
+                </div>
+
+                <!-- 상태 표시 -->
+                <div class="status-box" id="statusBox">
+                    <div class="status-label">상태</div>
+                    <div class="status-value" id="statusValue">대기 중</div>
+                </div>
+
+                <!-- 그래프 -->
+                <div class="chart-container">
+                    <canvas id="sensorChart"></canvas>
+                </div>
+
+                <!-- 통계 박스 -->
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">최대값</div>
+                        <div class="stat-value" id="maxValue">--</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">최소값</div>
+                        <div class="stat-value" id="minValue">--</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">평균값</div>
+                        <div class="stat-value" id="avgValue">--</div>
+                    </div>
+                </div>
+
+                <!-- 정상 범위 표시 -->
+                <div class="range-box">
+                    <div class="range-label">정상 범위</div>
+                    <div class="range-value" id="normalRange">--</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 위험 기록 및 데이터 축적 화면 -->
+        <section class="screen" id="recordsScreen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="app.showScreen('homeScreen')">← 뒤로</button>
+                <h2>데이터 축적 및 공중보건 확장</h2>
+            </div>
+            
+            <div class="data-accumulation-intro">
+                <h3>개인 건강 데이터 → 공중보건 데이터로의 확장</h3>
+                <p>
+                    개인의 위험 기록이 시간이 지나면서 쌓이면, 이를 분석하여 <strong>지역 보건 대응</strong>이 가능해집니다.
+                </p>
+                <div class="data-flow">
+                    <div class="flow-step">
+                        <div class="flow-icon">👤</div>
+                        <h4>1단계: 개인 데이터</h4>
+                        <p>개인의 건강 데이터 수집 및 위험 기록</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">👥</div>
+                        <h4>2단계: 지역 데이터</h4>
+                        <p>여러 개인 데이터를 집계하여 지역 패턴 분석</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🌍</div>
+                        <h4>3단계: 공중보건 데이터</h4>
+                        <p>정책 수립 및 공중보건 대응 기반 마련</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 필터 및 PDF 버튼 -->
+            <div class="records-controls">
+                <input type="date" class="date-filter" id="dateFilter" onchange="recordsManager.filterByDate()">
+                <button class="btn-pdf" onclick="pdfManager.generatePDF()">📄 PDF 변환</button>
+            </div>
+
+            <div class="records-section">
+                <h3>위험 기록 리스트</h3>
+                <p class="section-desc">시간 흐름에 따른 위험 기록을 확인하고, 데이터가 쌓일수록 지역 보건 대응이 가능해집니다.</p>
+                
+                <div class="records-list" id="recordsList">
+                    <!-- 기록 항목들이 동적으로 추가됩니다 -->
+                </div>
+
+                <div class="empty-state" id="emptyRecords" style="display: none;">
+                    <p>위험 기록이 없습니다.</p>
+                </div>
+            </div>
+
+            <div class="data-impact">
+                <h3>데이터 축적의 사회적 영향</h3>
+                <ul>
+                    <li><strong>조기 경보 시스템:</strong> 지역 단위 건강 위험 패턴 조기 감지</li>
+                    <li><strong>자원 배분 최적화:</strong> 의료 자원이 필요한 지역에 우선 배치</li>
+                    <li><strong>정책 수립 기반:</strong> 데이터 기반 보건 정책 수립</li>
+                    <li><strong>글로벌 협력:</strong> 개발도상국 간 데이터 공유 및 협력</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 위험 기록 상세 화면 -->
+        <section class="screen" id="recordDetailScreen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="app.showScreen('recordsScreen')">← 뒤로</button>
+                <h2>기록 상세</h2>
+            </div>
+            
+            <div class="record-detail-container" id="recordDetailContainer">
+                <!-- 상세 정보가 동적으로 추가됩니다 -->
+            </div>
+        </section>
+
+        <!-- 정책·사회적 확장 설명 화면 -->
+        <section class="screen" id="policyScreen">
+            <div class="screen-header">
+                <button class="btn-back" onclick="app.showScreen('homeScreen')">← 뒤로</button>
+                <h2>정책·사회적 확장 방안</h2>
+            </div>
+            
+            <div class="policy-intro">
+                <h3>저비용 디지털 헬스 기술의 확장 가능성</h3>
+                <p>
+                    이 앱과 같은 저비용 디지털 헬스 기술은 개발도상국, 재난 지역, 의료 취약 지역에서<br>
+                    실질적인 의료 격차 완화 도구로 활용될 수 있습니다.
+                </p>
+            </div>
+
+            <div class="policy-cards">
+                <!-- 개발도상국 활용 -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-icon">🌍</div>
+                        <h3>개발도상국 활용</h3>
+                    </div>
+                    <div class="policy-card-content">
+                        <h4>적용 시나리오</h4>
+                        <ul>
+                            <li><strong>의료 인프라 부족 지역:</strong> 저비용 센서로 기본 건강 모니터링 제공</li>
+                            <li><strong>원격 지역:</strong> 블루투스와 모바일 앱으로 의료 접근성 향상</li>
+                            <li><strong>예산 제약 지역:</strong> 고가 의료 장비 대신 저비용 솔루션 활용</li>
+                        </ul>
+                        <h4>기대 효과</h4>
+                        <ul>
+                            <li>의료 접근성 향상</li>
+                            <li>조기 위험 감지로 응급 상황 예방</li>
+                            <li>공중보건 데이터 수집 기반 마련</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 재난 지역 활용 -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-icon">🚨</div>
+                        <h3>재난 지역 활용</h3>
+                    </div>
+                    <div class="policy-card-content">
+                        <h4>적용 시나리오</h4>
+                        <ul>
+                            <li><strong>긴급 의료 지원:</strong> 재난 발생 시 빠른 건강 상태 모니터링</li>
+                            <li><strong>임시 의료 시설:</strong> 이동식 센서 네트워크 구축</li>
+                            <li><strong>대규모 건강 검진:</strong> 효율적인 대량 건강 데이터 수집</li>
+                        </ul>
+                        <h4>기대 효과</h4>
+                        <ul>
+                            <li>재난 대응 역량 강화</li>
+                            <li>제한된 의료 자원의 효율적 배분</li>
+                            <li>실시간 건강 모니터링으로 상황 파악</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 의료 취약 지역 활용 -->
+                <div class="policy-card">
+                    <div class="policy-card-header">
+                        <div class="policy-icon">🏥</div>
+                        <h3>의료 취약 지역 활용</h3>
+                    </div>
+                    <div class="policy-card-content">
+                        <h4>적용 시나리오</h4>
+                        <ul>
+                            <li><strong>농촌 지역:</strong> 의료 시설 접근이 어려운 지역의 건강 모니터링</li>
+                            <li><strong>고령자 거주 지역:</strong> 만성질환 관리 및 응급 상황 대비</li>
+                            <li><strong>저소득 지역:</strong> 의료비 부담 완화 및 예방적 건강 관리</li>
+                        </ul>
+                        <h4>기대 효과</h4>
+                        <ul>
+                            <li>의료 격차 완화</li>
+                            <li>예방적 건강 관리로 의료비 절감</li>
+                            <li>지역 보건 역량 강화</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-implementation">
+                <h3>구현 전략</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-item">
+                        <h4>1. 기술 접근성</h4>
+                        <p>저비용 센서와 스마트폰만으로 구축 가능하여 초기 투자 비용이 낮습니다.</p>
+                    </div>
+                    <div class="strategy-item">
+                        <h4>2. 교육 및 훈련</h4>
+                        <p>지역 보건 인력에 센서 사용법과 데이터 해석 방법을 교육합니다.</p>
+                    </div>
+                    <div class="strategy-item">
+                        <h4>3. 데이터 보안 및 프라이버시</h4>
+                        <p>개인 건강 정보 보호를 위한 법적·기술적 보안 체계 구축이 필요합니다.</p>
+                    </div>
+                    <div class="strategy-item">
+                        <h4>4. 정부 및 국제기구 협력</h4>
+                        <p>WHO, UN 등 국제기구와 협력하여 표준화 및 확산을 추진합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-impact">
+                <h3>사회적 영향 및 기여</h3>
+                <div class="impact-list">
+                    <div class="impact-item">
+                        <strong>SDGs 3번 목표 달성:</strong> 건강과 웰빙, 특히 3.d(조기경보 역량 강화)에 직접 기여
+                    </div>
+                    <div class="impact-item">
+                        <strong>의료 격차 완화:</strong> OECD 선진국과 개발도상국 간 의료 접근성 격차 축소
+                    </div>
+                    <div class="impact-item">
+                        <strong>공중보건 역량 강화:</strong> 데이터 기반 보건 정책 수립 및 대응 역량 향상
+                    </div>
+                    <div class="impact-item">
+                        <strong>지속가능한 발전:</strong> 저비용·고효율 솔루션으로 장기적 보건 시스템 구축
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-conclusion">
+                <h3>결론</h3>
+                <p>
+                    저비용 디지털 헬스 기술은 단순한 기술 솔루션이 아니라,<br>
+                    <strong>의료 격차 완화와 공중보건 역량 강화를 위한 실질적인 도구</strong>입니다.<br>
+                    이를 통해 UN SDGs 3번 목표 달성과 더 나은 건강한 사회 구현에 기여할 수 있습니다.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript 모듈 -->
+    <script src="js/bluetooth.js"></script>
+    <script src="js/sensors.js"></script>
+    <script src="js/records.js"></script>
+    <script src="js/pdf.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
+

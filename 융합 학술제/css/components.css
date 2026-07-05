@@ -1,0 +1,464 @@
+/* ============================================
+   건강 모니터링 시스템 - 컴포넌트 스타일시트
+   ============================================ */
+
+/* 센서 리스트 */
+.sensor-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.sensor-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.sensor-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.sensor-item-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sensor-icon {
+    font-size: 2.5rem;
+}
+
+.sensor-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sensor-status {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.sensor-status.normal {
+    color: var(--success-color);
+}
+
+.sensor-status.warning {
+    color: var(--warning-color);
+}
+
+.sensor-status.danger {
+    color: var(--danger-color);
+}
+
+.sensor-value-preview {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* 센서 상세 화면 */
+.sensor-detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.realtime-value-box {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.value-label {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.value-number {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.value-unit {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.status-box {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.status-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.status-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.status-value.normal {
+    color: var(--success-color);
+}
+
+.status-value.warning {
+    color: var(--warning-color);
+}
+
+.status-value.danger {
+    color: var(--danger-color);
+}
+
+.chart-container {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    height: 300px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.stat-box {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.range-box {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.range-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.range-value {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* 위험 기록 리스트 */
+.records-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.date-filter {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--card-bg);
+}
+
+.btn-pdf {
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.btn-pdf:hover {
+    background: #b91c1c;
+}
+
+.records-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.record-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--danger-color);
+}
+
+.record-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.record-time {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.record-sensor {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: var(--bg-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+}
+
+.record-content {
+    margin-top: 0.5rem;
+}
+
+.record-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--danger-color);
+    margin-bottom: 0.25rem;
+}
+
+.record-risk {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* 기록 상세 화면 */
+.record-detail-container {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.detail-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.detail-value {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.detail-value.danger {
+    color: var(--danger-color);
+}
+
+/* 응급 대처 화면 */
+.emergency-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.emergency-call-btn {
+    background: linear-gradient(135deg, var(--danger-color), #b91c1c);
+    color: white;
+    border: none;
+    padding: 2rem;
+    border-radius: 16px;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+    width: 100%;
+    animation: pulse 2s infinite;
+}
+
+.emergency-call-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 24px rgba(220, 38, 38, 0.5);
+    }
+}
+
+.accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.accordion-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    background: var(--card-bg);
+    border: none;
+    padding: 1.5rem;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: var(--bg-color);
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 1.5rem;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 1000px;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.accordion-content p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.accordion-content ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.accordion-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .value-number {
+        font-size: 3rem;
+    }
+
+    .records-controls {
+        flex-direction: column;
+    }
+
+    .date-filter {
+        width: 100%;
+    }
+
+    .emergency-call-btn {
+        font-size: 1.5rem;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sensor-list {
+        grid-template-columns: 1fr;
+    }
+
+    .value-number {
+        font-size: 2.5rem;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+}
+

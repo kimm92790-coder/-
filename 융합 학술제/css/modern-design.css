@@ -1,0 +1,545 @@
+/* ============================================
+   현대적인 모바일 앱 스타일 디자인
+   그림과 텍스트가 병행되는 카드 레이아웃
+   ============================================ */
+
+/* 메인 히어로 슬라이더 */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-lg);
+    background: #000;
+}
+
+@media (min-width: 768px) {
+    .hero-slider {
+        height: 420px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-slider {
+        height: 480px;
+    }
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.hero-caption {
+    position: absolute;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    color: #e5e7eb;
+}
+
+.hero-caption h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+    color: #f9fafb;
+}
+
+.hero-caption p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.hero-dots {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    display: flex;
+    gap: 0.35rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-dot.active {
+    width: 16px;
+    background: #ffffff;
+}
+
+/* 카드 스타일 개선 */
+.gap-card,
+.policy-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1.5rem;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gap-card:hover,
+.policy-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.gap-card-header,
+.policy-card-header {
+    background: linear-gradient(135deg, var(--primary-bg), #dbeafe);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.gap-card-content,
+.policy-card-content {
+    padding: 1.5rem;
+}
+
+/* 일러스트레이션 영역 */
+.illustration-section {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.illustration-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.illustration-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(37, 99, 235, 0.2));
+}
+
+.illustration-graphic {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* 비교 섹션 개선 */
+.gap-comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+@media (min-width: 768px) {
+    .gap-comparison {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+}
+
+.comparison-item {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-radius: 16px;
+    padding: 1.5rem;
+    flex: 1;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.comparison-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+}
+
+.comparison-item h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 700;
+}
+
+/* 그래프 및 차트 스타일 */
+.chart-wrapper {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-card);
+}
+
+.chart-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chart-title::before {
+    content: '📊';
+    font-size: 1.5rem;
+}
+
+/* 통계 박스 개선 */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat-box {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+/* 데이터 흐름 시각화 */
+.data-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+    .data-flow {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.flow-step {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    flex: 1;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.flow-step:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+    transform: scale(1.02);
+}
+
+.flow-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.2));
+}
+
+.flow-step h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.flow-step p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.flow-arrow {
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+@media (max-width: 767px) {
+    .flow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+    }
+}
+
+/* 섹션 헤더 스타일 */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.section-header-icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin: 0;
+}
+
+/* 요약 박스 */
+.summary-box {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--warning-color);
+    box-shadow: var(--shadow-card);
+}
+
+.summary-box h4 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.summary-box h4::before {
+    content: '💡';
+    font-size: 1.3rem;
+}
+
+.summary-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.summary-box li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.summary-box li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* 인용구 스타일 */
+.quote-box {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--primary-color);
+    position: relative;
+    box-shadow: var(--shadow-card);
+}
+
+.quote-box::before {
+    content: '"';
+    position: absolute;
+    top: 0.5rem;
+    left: 1rem;
+    font-size: 4rem;
+    color: var(--primary-color);
+    opacity: 0.2;
+    font-family: serif;
+    line-height: 1;
+}
+
+.quote-box p {
+    position: relative;
+    z-index: 1;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    font-style: italic;
+}
+
+/* 배지 및 태그 */
+.badge {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.25rem;
+}
+
+.badge-success {
+    background: var(--success-color);
+}
+
+.badge-warning {
+    background: var(--warning-color);
+}
+
+.badge-danger {
+    background: var(--danger-color);
+}
+
+/* 해시태그 스타일 */
+.hashtag {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-bg);
+    border-radius: 20px;
+}
+
+/* 미션 박스 개선 */
+.mission-box {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+}
+
+.mission-box h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mission-box h3::before {
+    content: '🎯';
+    font-size: 1.8rem;
+}
+
+.mission-box p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+}
+
+/* 반응형 개선 */
+@media (max-width: 480px) {
+    .gap-card-header,
+    .policy-card-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .illustration-icon {
+        font-size: 4rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
